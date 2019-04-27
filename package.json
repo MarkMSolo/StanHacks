@@ -4,7 +4,6 @@
   "description": "",
   "keywords": [],
   "main": "src/index.js",
-  "homepage": "https://markmsolo.github.io/StanHacks/",
   "dependencies": {
     "@tensorflow/tfjs": "1.0.0",
     "react": "16.5.2",
@@ -14,16 +13,12 @@
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0"
   },
-  "devDependencies": {
-    "gh-pages": "^2.0.1"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build",
+    "eject": "react-scripts eject"
   },
   "browserslist": [
     ">0.2%",
