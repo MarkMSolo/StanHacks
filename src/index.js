@@ -4,9 +4,14 @@ import ReactDOM from 'react-dom'
 import * as tf from '@tensorflow/tfjs'
 import './styles.css'
 
+import openSocket from 'socket.io-client';
+
 const MODEL_URL = process.env.PUBLIC_URL + '/model_web/'
 const LABELS_URL = MODEL_URL + 'labels.json'
 const MODEL_JSON = MODEL_URL + 'model.json'
+
+
+const  socket = openSocket('https://socket-server-example.herokuapp.com/');
 
 const TFWrapper = model => {
   const calculateMaxScores = (scores, numBoxes, numClasses) => {
@@ -25,6 +30,11 @@ const TFWrapper = model => {
       classes[i] = index
     }
     return [maxes, classes]
+  }
+
+  const msgHandler = (data) => {
+    console.log(data);
+    socket.emit('message', data);
   }
 
   const buildDetectedObjects = (
@@ -119,11 +129,22 @@ const TFWrapper = model => {
   }
 }
 
+
+socket.on('message', function(data) {
+  document.getElementById('global').innerHTML = data.msg;
+});
+
+
+
+
 class App extends React.Component {
   videoRef = React.createRef()
   canvasRef = React.createRef()
 
   componentDidMount() {
+
+
+
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       const webCamPromise = navigator.mediaDevices
         .getUserMedia({
@@ -197,12 +218,13 @@ class App extends React.Component {
       // Draw the text last to ensure it's on top.
       ctx.fillStyle = '#000000'
       ctx.fillText(label, x, y)
+      socket.emit('message', 'Suspicious activity detected')
     })
   }
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="video">
          <video
           className="size"
           autoPlay
@@ -218,8 +240,16 @@ class App extends React.Component {
           width="600"
           height="500"
         />
+
+        <a className="btn" onClick={() => {socket.emit('message', 'Premise is safe');}}>
+        Clear
+        </a>
+
+        <div>
+          <h3 id="global">Premise is safe</h3>
+        </div>
       </div>
-      
+
     )
   }
 }

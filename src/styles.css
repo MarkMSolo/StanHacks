@@ -1,8 +1,29 @@
 .size {
   position: fixed;
-  top: 0;
+  top: 50;
   left: 0;
   /* transform: scaleX(-1); */
+}
+
+#global {
+  float: right;
+  padding-top: 250px;
+  padding-right: 300px;
+}
+
+.btn {
+  float: right;
+  margin-top: 30px;
+  margin-right: 60px;
+  padding:10px 25px;
+  background-color: rgba(0,0,0,0.87);
+  color: white !important;
+  text-decoration: none;
+  list-style: none;
+}
+
+.video {
+  padding-top: 100px;
 }
 
 .test{
