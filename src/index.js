@@ -202,7 +202,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
+        <div className="row">
+        <div className="col-md-7 col-sm-12">
         <video
           className="size"
           autoPlay
@@ -218,6 +220,15 @@ class App extends React.Component {
           width="600"
           height="500"
         />
+        </div>
+      <div className="test jumbotron col-md-5 col-sm-12"> 
+          <div>
+            <li>Premise is safe</li>
+            <button type="button" class="btn btn-secondary">Clear</button>
+          </div>
+      </div>
+        </div>
+       
       </div>
     )
   }
